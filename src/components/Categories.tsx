@@ -1,6 +1,9 @@
+
 import { Link } from "react-router-dom";
 
+
 export function Categories (){
+
     return (
  <main>
   <section className="categories-container main-wrapper">
@@ -14,15 +17,15 @@ export function Categories (){
       </li>
       {/* <!--  --> */}
       <li>
-        <a href="/categories/2">jewelery</a>
+        <Link to="/categories/2">jewelery</Link>
       </li>
       {/* <!--  --> */}
       <li>
-        <a href="/categories/3">men's clothing</a>
+        <Link to="/categories/3">men's clothing</Link>
       </li>
       {/* <!--  --> */}
       <li>
-        <a href="/categories/4">women's clothing</a>
+        <Link to="/categories/4">women's clothing</Link>
       </li>
       {/* <!--  --> */}
     </ul>
