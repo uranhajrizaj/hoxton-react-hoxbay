@@ -10,7 +10,6 @@ export function Basket() {
       .then((productsFromServer) => setItem(productsFromServer));
   }, []);
 
-
   function getTotal() {
     let total = 0;
     for (let product of item) {
@@ -31,28 +30,30 @@ export function Basket() {
                 <p>{product.title}</p>
                 <p>
                   Qty:
-                 
-                  <select name="option"  onChange={(e) =>{
-                   
-                    fetch(`http://localhost:4000/products/${product.id}`, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({ inbasket: Number(e.target.value) }),
-                    })
-                      .then((res) => res.json())
-                      .then((updatedProduct) => {
-                        const updatedProducts = item.map((product) =>
-                          product.id === updatedProduct.id ? updatedProduct : product
-
-                        );
-                        setItem(updatedProducts);
-          
-                        
-                      });
-                    }}>
-
+                  <select
+                    name="option"
+                    onChange={(e) => {
+                      if(e.target.value==="0") location.reload();
+                      fetch(`http://localhost:4000/products/${product.id}`, {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          inbasket: Number(e.target.value),
+                        }),
+                      })
+                        .then((res) => res.json())
+                        .then((updatedProduct) => {
+                          const updatedProducts = item.map((product) =>
+                            product.id === updatedProduct.id
+                              ? updatedProduct
+                              : product
+                          );
+                          setItem(updatedProducts);
+                        });
+                    }}
+                  >
                     <option className="none">{product.inbasket}</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -62,7 +63,7 @@ export function Basket() {
                 </p>
 
                 {/* <!-- The item total is calculated using the Qty selected value --> */}
-                <p>Item total: £{product.price*product.inbasket}</p>
+                <p>Item total: £{product.price * product.inbasket}</p>
               </article>
             </li>
           ))}
