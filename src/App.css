@@ -207,12 +207,13 @@ img {
 .categories-container__list a {
   display: grid;
   height: 300px;
-  background-color: var(--random-colour);
+  background-color: var(--blue);
   place-items: center;
   text-transform: capitalize;
   text-align: center;
   color: var(--white);
   font-size: 2.5rem;
+
 }
 
 .categories-container__list a:hover {
@@ -265,4 +266,11 @@ img {
   align-items: center;
   grid-template-columns: auto 3fr 1fr 1fr;
   column-gap: 2rem;
+}
+/* 404 page not found */
+.page-not-found {
+  place-self: center;
+  object-fit: fill;
+  width: 100%;
+  height:80vh
 }
