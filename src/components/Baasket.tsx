@@ -48,8 +48,12 @@ export function Basket() {
 
                         );
                         setItem(updatedProducts);
+          
+                        
                       });
                     }}>
+
+                    <option className="none">{product.inbasket}</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
