@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Porducts } from "./Home";
+import { Porducts, Product } from "./Home";
 
 export function Basket() {
   const [item, setItem] = useState<Porducts>([]);
-  const[userchoice,setUserChoice]=useState()
+
   useEffect(() => {
     fetch(`http://localhost:4000/products?inbasket_gte=1`)
       .then((res) => res.json())
@@ -14,12 +14,11 @@ export function Basket() {
   function getTotal() {
     let total = 0;
     for (let product of item) {
-      if(userchoice===undefined) return
-      total += product.price * userchoice;
+      total += product.price * product.inbasket;
     }
     return total;
   }
-  
+
   return (
     <main>
       <section className="basket-container">
@@ -34,9 +33,22 @@ export function Basket() {
                   Qty:
                  
                   <select name="option" value='choice' onChange={(e) =>{
-                    //@ts-ignore
-                    setUserChoice(e.target.value); 
-                    console.log(userchoice)
+                   
+                    fetch(`http://localhost:4000/products/${product.id}`, {
+                      method: "PATCH",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ inbasket: Number(e.target.value) }),
+                    })
+                      .then((res) => res.json())
+                      .then((updatedProduct) => {
+                        const updatedProducts = item.map((product) =>
+                          product.id === updatedProduct.id ? updatedProduct : product
+
+                        );
+                        setItem(updatedProducts);
+                      });
                     }}>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -46,13 +58,13 @@ export function Basket() {
                 </p>
 
                 {/* <!-- The item total is calculated using the Qty selected value --> */}
-                <p>Item total: £{product.price*Number(userchoice)}</p>
+                <p>Item total: £{product.price*product.inbasket}</p>
               </article>
             </li>
           ))}
         </ul>
         {/* <!-- Basket total is calculated using each item's total from above --> */}
-        <h3>Your total: £{getTotal()}</h3>
+        <h3>Your total: £{getTotal().toFixed(2)}</h3>
       </section>
     </main>
   );
