@@ -32,7 +32,7 @@ export function Basket() {
                 <p>
                   Qty:
                  
-                  <select name="option" value='choice' onChange={(e) =>{
+                  <select name="option"  onChange={(e) =>{
                    
                     fetch(`http://localhost:4000/products/${product.id}`, {
                       method: "PATCH",
