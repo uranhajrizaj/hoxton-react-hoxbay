@@ -12,7 +12,8 @@ export type Product={
     category: {
         id: number;
         name: string;
-    }
+    };
+    inbasket: number;
   
   }
   

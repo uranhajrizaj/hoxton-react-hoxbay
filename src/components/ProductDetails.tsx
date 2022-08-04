@@ -24,9 +24,26 @@ export function ProductDetails() {
           <p>{product.description}</p>
           <p>£{product.price}</p>
           {/* <!-- Once you click in this button, the user should be redirected to the Basket page --> */}
-          <button>Add to basket</button>
+          <button
+         onClick={ function(event) {
+          let newinbasket = product.inbasket + 1;
+          fetch(`http://localhost:4000/products/${product.id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ inbasket: newinbasket }),
+          })
+          event.currentTarget.disabled = true;
+        } 
+      }
+          >
+            Add to basket
+          </button>
         </div>
       </section>
     </main>
   );
 }
+
+
