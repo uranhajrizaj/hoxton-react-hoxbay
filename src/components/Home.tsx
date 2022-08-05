@@ -21,7 +21,7 @@ export type Product={
 
 export function Home(){
     const [products,setProducts]=useState<Porducts >([])
-    const [filter,setFilter]=useState<string>("")
+
     useEffect(()=>{
       fetch(`http://localhost:4000/products?_expand=category`)
       .then(res=>res.json())
@@ -32,8 +32,8 @@ export function Home(){
     <div>
       <div className='input-div'>
     <input className='home-input' placeholder='Search for products...' name="search" onChange={(event)=>{
-      setFilter(event.target.value)
-      
+    
+
       fetch(`http://localhost:4000/products?title_like=${event.target.value}`)
       .then(res=>res.json())
       .then(productsFromServer=> setProducts(productsFromServer))
