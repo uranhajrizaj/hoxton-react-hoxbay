@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Porducts, Product } from "./Home";
 import { ProductDetails } from "./ProductDetails";
 
@@ -25,6 +26,7 @@ export function Basket() {
         <h2>Your Basket</h2>
         <ul>
           {item.map((product) => (
+            <Link to={`/products/${product.id}`}>
             <li className="basket-li">
               <article className="basket-container__item">
                 <img src={product.image} alt={product.title} width="90" />
@@ -67,6 +69,7 @@ export function Basket() {
                 <p>Item total: £{product.price * product.inbasket}</p>
               </article>
             </li>
+            </Link>
           ))}
         </ul>
         {/* <!-- Basket total is calculated using each item's total from above --> */}
