@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Porducts, Product } from "./Home";
+import { ProductDetails } from "./ProductDetails";
 
 export function Basket() {
   const [item, setItem] = useState<Porducts>([]);
@@ -24,7 +25,7 @@ export function Basket() {
         <h2>Your Basket</h2>
         <ul>
           {item.map((product) => (
-            <li>
+            <li className="basket-li">
               <article className="basket-container__item">
                 <img src={product.image} alt={product.title} width="90" />
                 <p>{product.title}</p>

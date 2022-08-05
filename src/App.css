@@ -277,3 +277,20 @@ img {
 .none{
   display: none;
 }
+.basket-li{
+  cursor:pointer;
+}
+.home-input{
+  width: 50%;
+  height: 2rem;
+  border: 1px solid var(--grey);
+  border-radius: 5px;
+  padding: 0.5rem;
+  justify-self: center;
+
+}
+.input-div{
+  display: grid;
+  place-self: center;
+
+}
